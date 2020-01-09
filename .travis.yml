@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
   - 7.4
@@ -13,7 +12,7 @@ install:
 
 # Testing the app (see phpunit.xml) for configs, generating Code Coverage report
 script:
-  - ./vendor/phpunit/phpunit/phpunit --no-configuration tests/Unit --cache-result-file=.phpunit.result.cache
+  - ./vendor/phpunit/phpunit/phpunit --no-configuration tests/Unit --cache-result-file=.phpunit.result.cache --coverage-clover=coverage.xml
 
 after_success:
   # Submit coverage report to https://codecov.io
