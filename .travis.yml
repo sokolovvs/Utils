@@ -12,7 +12,7 @@ install:
 
 # Testing the app (see phpunit.xml) for configs, generating Code Coverage report
 script:
-  - ./vendor/phpunit/phpunit/phpunit --no-configuration tests/Unit --cache-result-file=.phpunit.result.cache --coverage-clover=coverage.xml
+  - ./vendor/phpunit/phpunit/phpunit --configuration phpunit.xml.dist --coverage-clover=coverage.xml
 
 after_success:
   # Submit coverage report to https://codecov.io
