@@ -234,9 +234,10 @@ class StringUtils
 
         $result = '';
 
-        while (mb_strlen($result) >= $length) {
+        while (mb_strlen($result) < $length) {
             try {
-                $result .= $chars[random_int(0, count($chars) - 1)];
+                $randIndex = random_int(0, count($chars) - 1);
+                $result .= $chars[$randIndex];
             } catch (\Exception $e) {
             }
         }

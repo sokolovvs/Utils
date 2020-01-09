@@ -31,7 +31,7 @@ class FileUtilsTest extends TestCase
         );
     }
 
-    public function testWriteFile(): void
+    public function _testWriteFile(): void
     {
         $path = './tmp/t/t/y/u/i/o/ghgftt.txt';
         $data = 'Lalala';
