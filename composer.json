@@ -14,7 +14,8 @@
     "php": ">=7.2",
     "phpunit/phpunit": "8.5.x-dev",
     "ext-mbstring": "*",
-    "symfony/http-foundation": "^5.1@dev"
+    "symfony/http-foundation": "^5.1@dev",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {

@@ -1,8 +1,10 @@
 <?php
 
 
-namespace Sokolovvs\Utils;
+namespace Sokolovvs\Utils\ArrayUtils;
 
+
+use Sokolovvs\Utils\StringUtils\StringUtils;
 
 class ArrayUtils
 {

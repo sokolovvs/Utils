@@ -18,12 +18,10 @@ after_success:
   # Submit coverage report to https://codecov.io
   - bash <(curl -s https://codecov.io/bash)
 
-#after_failure:
-
 branches:
   only:
     - master
-    - dev
+    - develop
 
 cache:
   directories:

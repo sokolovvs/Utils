@@ -1,6 +1,6 @@
 <?php
 
-namespace Sokolovvs\Utils;
+namespace Sokolovvs\Utils\StringUtils;
 
 
 class StringUtils
@@ -235,11 +235,8 @@ class StringUtils
         $result = '';
 
         while (mb_strlen($result) < $length) {
-            try {
-                $randIndex = random_int(0, count($chars) - 1);
-                $result .= $chars[$randIndex];
-            } catch (\Exception $e) {
-            }
+            $randIndex = random_int(0, count($chars) - 1);
+            $result .= $chars[$randIndex];
         }
 
         return $result;

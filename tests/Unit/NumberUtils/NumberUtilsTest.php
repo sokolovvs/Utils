@@ -5,7 +5,7 @@ namespace Tests\Unit\NumberUtils;
 
 
 use PHPUnit\Framework\TestCase;
-use Sokolovvs\Utils\NumberUtils;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
 
 abstract class NumberUtilsTest extends TestCase
 {

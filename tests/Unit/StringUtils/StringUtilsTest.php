@@ -4,7 +4,7 @@ namespace Tests\Unit\StringUtils;
 
 
 use PHPUnit\Framework\TestCase;
-use Sokolovvs\Utils\StringUtils;
+use Sokolovvs\Utils\StringUtils\StringUtils;
 use Tests\Support\TestData\ClassWithToString;
 
 
@@ -200,5 +200,14 @@ class StringUtilsTest extends TestCase
     public function testRand(): void
     {
         $this->assertEquals(13, mb_strlen($this->stringUtils->rand(13, 'KakaЛала123_!')));
+        $this->assertEquals(5, mb_strlen($this->stringUtils->rand(5, ['f', 'f', 'ss', 'ь'])));
+    }
+
+    public function testRandWithInvalidParameterAlphabet(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectErrorMessage('Parameter alphabet must been string or array');
+        $this->stringUtils->rand(1,  4);
+
     }
 }

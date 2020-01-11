@@ -5,7 +5,7 @@ namespace Tests\Unit\DateTimeUtils;
 
 
 use PHPUnit\Framework\TestCase;
-use Sokolovvs\Utils\DateTimeUtils;
+use Sokolovvs\Utils\DateTimeUtils\DateTimeUtils;
 
 abstract class DateTimeUtilsTest extends TestCase
 {

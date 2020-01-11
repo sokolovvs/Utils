@@ -5,7 +5,7 @@ namespace Tests\Unit\ArrayUtils;
 
 
 use PHPUnit\Framework\TestCase;
-use Sokolovvs\Utils\ArrayUtils;
+use Sokolovvs\Utils\ArrayUtils\ArrayUtils;
 
 abstract class ArrayUtilsTest extends TestCase
 {
