@@ -12,9 +12,9 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.2",
-    "phpunit/phpunit": "8.5.x-dev",
+    "phpunit/phpunit": "^8.0",
+    "symfony/http-foundation": "^5.0|^4.4|^3.4",
     "ext-mbstring": "*",
-    "symfony/http-foundation": "^5.1@dev",
     "ext-json": "*"
   },
   "autoload": {
