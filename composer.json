@@ -1,6 +1,6 @@
 {
   "name": "sokolovvs/utils",
-  "description": "Utilities",
+  "description": "Utilities for php.",
   "type": "library",
   "license": "MIT",
   "authors": [
