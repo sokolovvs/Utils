@@ -87,11 +87,12 @@ class FileUtils
     /**
      * Remove files and directories by path and pattern. Used glob().
      *
+     * @param string $path
      * @param string $pattern
      */
-    public function clearDirectory($pattern = '*'): void
+    public function clearDirectory($path = '*', $pattern = '*'): void
     {
-        $files = glob("$pattern");
+        $files = glob("$path/$pattern");
 
         foreach ($files as $file) {
             if (is_file($file)) {
@@ -108,20 +109,18 @@ class FileUtils
      * Recursively delete a directory and all of it's contents - e.g.the equivalent of `rm -r` on the command-line.
      * Consistent with `rmdir()` and `unlink()`, an E_WARNING level error will be generated on failure.
      *
-     * @param string $source absolute path to directory or file to delete.
+     * @param string $source             absolute path to directory or file to delete.
      * @param bool   $removeOnlyChildren set to true will only remove content inside directory.
      *
      * @return bool true on success; false on failure
      */
     public function removeDirRecursively($source, $removeOnlyChildren = false): bool
     {
-        if(empty($source) || file_exists($source) === false)
-        {
+        if (empty($source) || file_exists($source) === false) {
             return false;
         }
 
-        if(is_file($source) || is_link($source))
-        {
+        if (is_file($source) || is_link($source)) {
             return unlink($source);
         }
 
@@ -131,23 +130,17 @@ class FileUtils
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        foreach($files as $fileInfo)
-        {
-            if($fileInfo->isDir())
-            {
-                if($this->removeDirRecursively($fileInfo->getRealPath()) === false)
-                {
+        foreach ($files as $fileInfo) {
+            if ($fileInfo->isDir()) {
+                if ($this->removeDirRecursively($fileInfo->getRealPath()) === false) {
                     return false;
                 }
-            }
-            elseif(unlink($fileInfo->getRealPath()) === false)
-            {
+            } elseif (unlink($fileInfo->getRealPath()) === false) {
                 return false;
             }
         }
 
-        if($removeOnlyChildren === false)
-        {
+        if ($removeOnlyChildren === false) {
             return rmdir($source);
         }
 
@@ -159,12 +152,17 @@ class FileUtils
         string $pathToDir,
         string $prefixName = ''
     ): string {
-        $unique = uniqid($prefixName, true);
-        $fileExt = $uploadedFile->guessClientExtension();
-        $path = "$unique.$fileExt";
-        $path = $this->replaceSlashesByDirectorySeparator($path);
-        $file = $uploadedFile->move($pathToDir, $path);
+        $unique = uniqid($prefixName);
+        $fileExt = $uploadedFile->getClientOriginalExtension();
+        $uniqueFileName = "$unique.$fileExt";
+        $uniqueFileName = $this->replaceSlashesByDirectorySeparator($uniqueFileName);
 
-        return $file->getFilename();
+        if (!is_dir($pathToDir)) {
+            $this->makeDirectory($pathToDir);
+        }
+
+        $file = $uploadedFile->move($pathToDir, $uniqueFileName);
+
+        return "$pathToDir/$uniqueFileName";
     }
 }

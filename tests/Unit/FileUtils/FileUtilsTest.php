@@ -10,6 +10,10 @@ use Sokolovvs\Utils\StringUtils\StringUtils;
 
 abstract class FileUtilsTest extends TestCase
 {
+    public const PATH_TO_MOVED_FILES = './tests/Support/TestData/DirForMovedFiles';
+
+    public const PATH_TO_NEW_FILES = 'tests/Support/TestData/DirForNewFiles';
+
     /* @var FileUtils $fileUtils */
     protected $fileUtils;
 

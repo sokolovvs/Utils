@@ -19,7 +19,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Sokolovvs\\Utils\\": "src",
+      "Sokolovvs\\Utils\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Tests\\": "tests"
     }
   }
