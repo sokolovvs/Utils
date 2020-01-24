@@ -6,4 +6,6 @@
 
 **Installation**
 
+composer require sokolovvs/utils
+
 **Documentation**
