@@ -4,7 +4,10 @@
 namespace Tests\Unit\DateTimeUtils;
 
 
-class DateTimeUtilsGetDateTimeMutableFromStringTest extends DateTimeUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\DateTimeUtils\DateTimeUtils;
+
+class DateTimeUtilsGetDateTimeMutableFromStringTest extends TestCase
 {
     public function testReturnDateTimeIfParameterValidDateTimeString(): void
     {
@@ -12,23 +15,23 @@ class DateTimeUtilsGetDateTimeMutableFromStringTest extends DateTimeUtilsTest
 
         $this->assertEquals(
             new \DateTime($dateTimeAsString),
-            $this->dateTimeUtils->getDateTimeMutableOrNullFromString($dateTimeAsString)
+            DateTimeUtils::getDateTimeMutableOrNullFromString($dateTimeAsString)
         );
     }
 
     public function testReturnNullIfParameterIsInvalidDateTimeString(): void
     {
-        $this->assertNull($this->dateTimeUtils->getDateTimeMutableOrNullFromString(new \DateTime()));
-        $this->assertNull($this->dateTimeUtils->getDateTimeMutableOrNullFromString(''));
-        $this->assertNull($this->dateTimeUtils->getDateTimeMutableOrNullFromString([]));
-        $this->assertNull($this->dateTimeUtils->getDateTimeMutableOrNullFromString(-12132333223323));
-        $this->assertNull($this->dateTimeUtils->getDateTimeMutableOrNullFromString(34.5623223233232));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(new \DateTime()));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(''));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString([]));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(-12132333223323));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(34.5623223233232));
     }
 
     public function testReturnDateTimeIfParameterIsTimestamp(): void
     {
         $this->assertEquals(
-            new \DateTime('@1578332712'), $this->dateTimeUtils->getDateTimeMutableOrNullFromString('@1578332712')
+            new \DateTime('@1578332712'), DateTimeUtils::getDateTimeMutableOrNullFromString('@1578332712')
         );
     }
 

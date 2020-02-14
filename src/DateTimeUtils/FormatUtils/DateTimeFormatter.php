@@ -9,20 +9,20 @@ use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\Format;
 
 class DateTimeFormatter
 {
-    public function dateToFormat(DateTimeInterface $dateTime, Format $format): string
+    public static function dateToFormat(?DateTimeInterface $dateTime, Format $format): ?string
     {
-        return $dateTime->format($format->getDateFormat());
+        return $dateTime ? $dateTime->format($format->getDateFormat()) : null;
     }
 
-    public function dateTimeToFormat(DateTimeInterface $dateTime, Format $format): string
+    public static function dateTimeToFormat(?DateTimeInterface $dateTime, Format $format): ?string
     {
-        return $dateTime->format($format->getDateTimeFormat());
+        return $dateTime ? $dateTime->format($format->getDateTimeFormat()) : null;
     }
 
     /**
      * @codeCoverageIgnore
      */
-    public function getAllFormats(): array
+    public static function getAllFormats(): array
     {
         $allFormats = [];
 

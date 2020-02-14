@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsFilterNumericTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsFilterNumericTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->filterNumeric($number));
+        $this->assertEquals($expected, NumberUtils::filterNumeric($number));
     }
 
     public function dataProvide(): array
@@ -19,7 +22,10 @@ class NumberUtilsFilterNumericTest extends NumberUtilsTest
         return [
             '10 is number' => [10, 10],
             'PHP_INT_MIN is number' => [PHP_INT_MIN, PHP_INT_MIN],
-//            'PHP_INT_MIN - 1 is not number' => [PHP_INT_MIN - 1, PHP_INT_MIN - 1], //TODO: need fix
+            'PHP_INT_MIN - 1 is number' => [
+                sprintf('%.13f', PHP_INT_MIN - 1),
+                sprintf('%.13f', PHP_INT_MIN - 1),
+            ],
             '\'-356\' is number' => ['-356', -356],
             '-56.232 is not number' => [-56.232, -56.232],
             'NULL is not number' => [null, null],

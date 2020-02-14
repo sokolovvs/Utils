@@ -4,6 +4,8 @@
 namespace Tests\Unit\FileUtils;
 
 
+use Sokolovvs\Utils\FileUtils\FileUtils;
+
 class FileUtilsWriteFileTest extends FileUtilsTest
 {
 
@@ -21,7 +23,7 @@ class FileUtilsWriteFileTest extends FileUtilsTest
             $this->testWriteEmptyFileInCurrentDirWithValidPath($path, $fileContent);
         }
 
-        $this->fileUtils->writeFile($path, $fileContent);
+        FileUtils::writeFile($path, $fileContent);
 
         $this->assertFileExists($path);
         $this->assertStringEqualsFile($path, $fileContent);

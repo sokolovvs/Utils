@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsToFixedTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsToFixedTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $precision, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->toFixed($number, $precision));
+        $this->assertEquals($expected, NumberUtils::toFixed($number, $precision));
     }
 
     public function dataProvide(): array

@@ -4,6 +4,7 @@
 namespace Tests\Unit\FileUtils;
 
 
+use Sokolovvs\Utils\FileUtils\FileUtils;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUtilsSaveUploadedFileWithUniqueNameTest extends FileUtilsTest
@@ -12,13 +13,13 @@ class FileUtilsSaveUploadedFileWithUniqueNameTest extends FileUtilsTest
     {
         parent::setUp();
 
-        $this->fileUtils->writeFile(static::PATH_TO_NEW_FILES . '/test.php', 'aa');
+        FileUtils::writeFile(static::PATH_TO_NEW_FILES . '/test.php', 'aa');
     }
 
     protected function tearDown(): void
     {
-        $this->fileUtils->clearDirectory(static::PATH_TO_NEW_FILES, '*.php');
-        $this->fileUtils->clearDirectory(static::PATH_TO_MOVED_FILES, '*.php');
+        FileUtils::clearDirectory(static::PATH_TO_NEW_FILES, '*.php');
+        FileUtils::clearDirectory(static::PATH_TO_MOVED_FILES, '*.php');
     }
 
     public function test(): void
@@ -31,7 +32,7 @@ class FileUtilsSaveUploadedFileWithUniqueNameTest extends FileUtilsTest
             UPLOAD_ERR_OK, true
         );
 
-        $path = $this->fileUtils->saveUploadedFileWithUniqueName(
+        $path = FileUtils::saveUploadedFileWithUniqueName(
             $uploadedFile, static::PATH_TO_MOVED_FILES,
             $prefix
         );

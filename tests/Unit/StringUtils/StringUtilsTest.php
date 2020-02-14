@@ -10,204 +10,196 @@ use Tests\Support\TestData\ClassWithToString;
 
 class StringUtilsTest extends TestCase
 {
-    protected $stringUtils;
-
-    public function setUp(): void
-    {
-        $this->stringUtils = new StringUtils();
-    }
-
     public function testTrimToNull(): void
     {
         $valueForCheckWorkWithToString = new ClassWithToString("  BB   \t\t\v");
-        $this->assertEquals(null, $this->stringUtils->trimToNull(''));
-        $this->assertEquals('AsD', $this->stringUtils->trimToNull('  AsD     '));
+        $this->assertEquals(null, StringUtils::trimToNull(''));
+        $this->assertEquals('AsD', StringUtils::trimToNull('  AsD     '));
         $this->assertEquals(
-            'A dd', $this->stringUtils->trimToNull("  \t \n \t A dd \v\t      ")
+            'A dd', StringUtils::trimToNull("  \t \n \t A dd \v\t      ")
         );
-        $this->assertEquals(null, $this->stringUtils->trimToNull(null));
-        $this->assertEquals(null, $this->stringUtils->trimToNull(['aa']));
-        $this->assertEquals(null, $this->stringUtils->trimToNull(new \stdClass()));
-        $this->assertEquals('-124434', $this->stringUtils->trimToNull(-124434));
-        $this->assertEquals(0, $this->stringUtils->trimToNull(0));
+        $this->assertEquals(null, StringUtils::trimToNull(null));
+        $this->assertEquals(null, StringUtils::trimToNull(['aa']));
+        $this->assertEquals(null, StringUtils::trimToNull(new \stdClass()));
+        $this->assertEquals('-124434', StringUtils::trimToNull(-124434));
+        $this->assertEquals(0, StringUtils::trimToNull(0));
         $this->assertEquals(
-            'BB', $this->stringUtils->trimToNull($valueForCheckWorkWithToString)
+            'BB', StringUtils::trimToNull($valueForCheckWorkWithToString)
         );
         $this->assertEquals(
-            'Мама мыла раму', $this->stringUtils->trimToNull('  Мама мыла раму  ')
+            'Мама мыла раму', StringUtils::trimToNull('  Мама мыла раму  ')
         );
     }
 
     public function testTrimToEmpty(): void
     {
         $valueForCheckWorkWithToString = new ClassWithToString("  BB   \t\t\v");
-        $this->assertEquals('', $this->stringUtils->trimToEmpty(''));
-        $this->assertEquals('AsD', $this->stringUtils->trimToEmpty('  AsD     '));
+        $this->assertEquals('', StringUtils::trimToEmpty(''));
+        $this->assertEquals('AsD', StringUtils::trimToEmpty('  AsD     '));
         $this->assertEquals(
-            'A dd', $this->stringUtils->trimToEmpty("  \t \n \t A dd \v\t      ")
+            'A dd', StringUtils::trimToEmpty("  \t \n \t A dd \v\t      ")
         );
-        $this->assertEquals('', $this->stringUtils->trimToEmpty(null));
-        $this->assertEquals('', $this->stringUtils->trimToEmpty(['aa']));
-        $this->assertEquals('', $this->stringUtils->trimToEmpty(new \stdClass()));
-        $this->assertEquals('-124434', $this->stringUtils->trimToEmpty(-124434));
-        $this->assertEquals(0, $this->stringUtils->trimToEmpty(0));
+        $this->assertEquals('', StringUtils::trimToEmpty(null));
+        $this->assertEquals('', StringUtils::trimToEmpty(['aa']));
+        $this->assertEquals('', StringUtils::trimToEmpty(new \stdClass()));
+        $this->assertEquals('-124434', StringUtils::trimToEmpty(-124434));
+        $this->assertEquals(0, StringUtils::trimToEmpty(0));
         $this->assertEquals(
-            'BB', $this->stringUtils->trimToEmpty($valueForCheckWorkWithToString)
+            'BB', StringUtils::trimToEmpty($valueForCheckWorkWithToString)
         );
         $this->assertEquals(
-            'Мама мыла раму', $this->stringUtils->trimToEmpty('  Мама мыла раму  ')
+            'Мама мыла раму', StringUtils::trimToEmpty('  Мама мыла раму  ')
         );
     }
 
     public function testStartsWith(): void
     {
-        $this->assertTrue($this->stringUtils->startsWith('Строка для поиска', 'Строка'));
-        $this->assertFalse($this->stringUtils->startsWith('Строка для поиска', 'Строка  '));
-        $this->assertFalse($this->stringUtils->startsWith('Строка для поиска', 'для'));
-        $this->assertTrue($this->stringUtils->startsWith('Строка для поиска', ['строка', 'Строка']));
-        $this->assertFalse($this->stringUtils->startsWith('Строка для поиска', ['строка']));
-        $this->assertTrue($this->stringUtils->startsWith('Some string for searching', 'Some'));
-        $this->assertFalse($this->stringUtils->startsWith('Some string for searching', 'Some  '));
-        $this->assertFalse($this->stringUtils->startsWith('Some string for searching', 'for'));
-        $this->assertTrue($this->stringUtils->startsWith('Some string for searching', ['some', 'Some']));
-        $this->assertFalse($this->stringUtils->startsWith('Some string for searching', ['some']));
-        $this->assertFalse($this->stringUtils->startsWith('Some string for searching', [null, new \stdClass()]));
-        $this->assertTrue($this->stringUtils->startsWith('Some string for searching', 'Some string for searching'));
+        $this->assertTrue(StringUtils::startsWith('Строка для поиска', 'Строка'));
+        $this->assertFalse(StringUtils::startsWith('Строка для поиска', 'Строка  '));
+        $this->assertFalse(StringUtils::startsWith('Строка для поиска', 'для'));
+        $this->assertTrue(StringUtils::startsWith('Строка для поиска', ['строка', 'Строка']));
+        $this->assertFalse(StringUtils::startsWith('Строка для поиска', ['строка']));
+        $this->assertTrue(StringUtils::startsWith('Some string for searching', 'Some'));
+        $this->assertFalse(StringUtils::startsWith('Some string for searching', 'Some  '));
+        $this->assertFalse(StringUtils::startsWith('Some string for searching', 'for'));
+        $this->assertTrue(StringUtils::startsWith('Some string for searching', ['some', 'Some']));
+        $this->assertFalse(StringUtils::startsWith('Some string for searching', ['some']));
+        $this->assertFalse(StringUtils::startsWith('Some string for searching', [null, new \stdClass()]));
+        $this->assertTrue(StringUtils::startsWith('Some string for searching', 'Some string for searching'));
     }
 
     public function testEndsWith(): void
     {
-        $this->assertTrue($this->stringUtils->endsWith('Строка для поиска', 'поиска'));
-        $this->assertFalse($this->stringUtils->endsWith('Строка для поиска', '  поиска'));
-        $this->assertFalse($this->stringUtils->endsWith('Строка для поиска', 'для'));
-        $this->assertTrue($this->stringUtils->endsWith('Строка для поиска', ['строка', 'ска']));
-        $this->assertFalse($this->stringUtils->endsWith('Строка для поиска', ['по']));
-        $this->assertTrue($this->stringUtils->endsWith('Some string for searching', 'ing'));
-        $this->assertFalse($this->stringUtils->endsWith('Some string for searching', 'search'));
-        $this->assertFalse($this->stringUtils->endsWith('Some string for searching', 'for'));
-        $this->assertFalse($this->stringUtils->endsWith('Some string for searching', ['some']));
-        $this->assertFalse($this->stringUtils->endsWith('Some string for searching', [null, new \stdClass()]));
-        $this->assertTrue($this->stringUtils->endsWith('Some string for searching', 'Some string for searching'));
+        $this->assertTrue(StringUtils::endsWith('Строка для поиска', 'поиска'));
+        $this->assertFalse(StringUtils::endsWith('Строка для поиска', '  поиска'));
+        $this->assertFalse(StringUtils::endsWith('Строка для поиска', 'для'));
+        $this->assertTrue(StringUtils::endsWith('Строка для поиска', ['строка', 'ска']));
+        $this->assertFalse(StringUtils::endsWith('Строка для поиска', ['по']));
+        $this->assertTrue(StringUtils::endsWith('Some string for searching', 'ing'));
+        $this->assertFalse(StringUtils::endsWith('Some string for searching', 'search'));
+        $this->assertFalse(StringUtils::endsWith('Some string for searching', 'for'));
+        $this->assertFalse(StringUtils::endsWith('Some string for searching', ['some']));
+        $this->assertFalse(StringUtils::endsWith('Some string for searching', [null, new \stdClass()]));
+        $this->assertTrue(StringUtils::endsWith('Some string for searching', 'Some string for searching'));
     }
 
     public function testContains(): void
     {
-        $this->assertTrue($this->stringUtils->contains('Строка для поиска', 'поиска'));
-        $this->assertFalse($this->stringUtils->contains('Строка для поиска', '  поиска'));
-        $this->assertFalse($this->stringUtils->contains('Строка для поиска', 'для   '));
-        $this->assertTrue($this->stringUtils->contains('Строка для поиска', ['для', 'ска']));
-        $this->assertTrue($this->stringUtils->contains('Строка для поиска', ['по']));
-        $this->assertTrue($this->stringUtils->contains('Some string for searching', 'ing'));
-        $this->assertFalse($this->stringUtils->contains('Some string for searching', '  search'));
-        $this->assertTrue($this->stringUtils->contains('Some string for searching', 'for'));
-        $this->assertFalse($this->stringUtils->contains('Some string for searching', ['some']));
-        $this->assertFalse($this->stringUtils->contains('Some string for searching', [null, new \stdClass()]));
-        $this->assertTrue($this->stringUtils->contains('Some string for searching', 'Some string for searching'));
+        $this->assertTrue(StringUtils::contains('Строка для поиска', 'поиска'));
+        $this->assertFalse(StringUtils::contains('Строка для поиска', '  поиска'));
+        $this->assertFalse(StringUtils::contains('Строка для поиска', 'для   '));
+        $this->assertTrue(StringUtils::contains('Строка для поиска', ['для', 'ска']));
+        $this->assertTrue(StringUtils::contains('Строка для поиска', ['по']));
+        $this->assertTrue(StringUtils::contains('Some string for searching', 'ing'));
+        $this->assertFalse(StringUtils::contains('Some string for searching', '  search'));
+        $this->assertTrue(StringUtils::contains('Some string for searching', 'for'));
+        $this->assertFalse(StringUtils::contains('Some string for searching', ['some']));
+        $this->assertFalse(StringUtils::contains('Some string for searching', [null, new \stdClass()]));
+        $this->assertTrue(StringUtils::contains('Some string for searching', 'Some string for searching'));
     }
 
     public function testContainsAll(): void
     {
-        $this->assertTrue($this->stringUtils->containsAll('Строка для поиска', ['поиска']));
-        $this->assertFalse($this->stringUtils->containsAll('Строка для поиска', ['  поиска']));
-        $this->assertFalse($this->stringUtils->containsAll('Строка для поиска', ['для   ']));
-        $this->assertTrue($this->stringUtils->containsAll('Строка для поиска', ['для', 'ска']));
-        $this->assertFalse($this->stringUtils->containsAll('Строка для поиска', ['для', 'ска', 'h']));
-        $this->assertTrue($this->stringUtils->containsAll('Строка для поиска', ['по']));
-        $this->assertTrue($this->stringUtils->containsAll('Some string for searching', ['ing']));
-        $this->assertFalse($this->stringUtils->containsAll('Some string for searching', ['  search']));
-        $this->assertTrue($this->stringUtils->containsAll('Some string for searching', ['for']));
-        $this->assertFalse($this->stringUtils->containsAll('Some string for searching', ['some']));
-        $this->assertTrue($this->stringUtils->containsAll('Some string for searching', ['Some string for searching']));
+        $this->assertTrue(StringUtils::containsAll('Строка для поиска', ['поиска']));
+        $this->assertFalse(StringUtils::containsAll('Строка для поиска', ['  поиска']));
+        $this->assertFalse(StringUtils::containsAll('Строка для поиска', ['для   ']));
+        $this->assertTrue(StringUtils::containsAll('Строка для поиска', ['для', 'ска']));
+        $this->assertFalse(StringUtils::containsAll('Строка для поиска', ['для', 'ска', 'h']));
+        $this->assertTrue(StringUtils::containsAll('Строка для поиска', ['по']));
+        $this->assertTrue(StringUtils::containsAll('Some string for searching', ['ing']));
+        $this->assertFalse(StringUtils::containsAll('Some string for searching', ['  search']));
+        $this->assertTrue(StringUtils::containsAll('Some string for searching', ['for']));
+        $this->assertFalse(StringUtils::containsAll('Some string for searching', ['some']));
+        $this->assertTrue(StringUtils::containsAll('Some string for searching', ['Some string for searching']));
         $this->expectException(\InvalidArgumentException::class);
-        $this->stringUtils->containsAll('Some string for searching', [null, new \stdClass()]);
+        StringUtils::containsAll('Some string for searching', [null, new \stdClass()]);
     }
 
     public function testToArray(): void
     {
-        $this->assertEquals(['p', 'h', 'p'], $this->stringUtils->toArray('php'));
-        $this->assertEquals(['p', ' ', "\n", 'h', 'p'], $this->stringUtils->toArray("p \nhp"));
-        $this->assertEquals(['п', ' ', "\n", 'Х', 'p'], $this->stringUtils->toArray("п \nХp"));
+        $this->assertEquals(['p', 'h', 'p'], StringUtils::toArray('php'));
+        $this->assertEquals(['p', ' ', "\n", 'h', 'p'], StringUtils::toArray("p \nhp"));
+        $this->assertEquals(['п', ' ', "\n", 'Х', 'p'], StringUtils::toArray("п \nХp"));
     }
 
     public function testStripSpace(): void
     {
-        $this->assertEquals('', $this->stringUtils->stripSpace(''));
-        $this->assertEquals('', $this->stringUtils->stripSpace("  \n\t\v\v\t\n "));
-        $this->assertEquals('Озеро', $this->stringUtils->stripSpace("  \n\t\vОзеро\v\t\n "));
-        $this->assertEquals('Lake', $this->stringUtils->stripSpace("  \n\t\vLake\v\t\n "));
-        $this->assertEquals('Озеро', $this->stringUtils->stripSpace("  \n\t\vОз е\n\t\vро\v\t\n "));
+        $this->assertEquals('', StringUtils::stripSpace(''));
+        $this->assertEquals('', StringUtils::stripSpace("  \n\t\v\v\t\n "));
+        $this->assertEquals('Озеро', StringUtils::stripSpace("  \n\t\vОзеро\v\t\n "));
+        $this->assertEquals('Lake', StringUtils::stripSpace("  \n\t\vLake\v\t\n "));
+        $this->assertEquals('Озеро', StringUtils::stripSpace("  \n\t\vОз е\n\t\vро\v\t\n "));
     }
 
     public function testToLowerCase(): void
     {
         $this->assertEquals(
-            "\t\vlake ontario 223_!  \n", $this->stringUtils->toLowerCase("\t\vlake Ontario 223_!  \n")
+            "\t\vlake ontario 223_!  \n", StringUtils::toLowerCase("\t\vlake Ontario 223_!  \n")
         );
         $this->assertEquals(
-            "\t\vозеро онтарио 223_!  \n", $this->stringUtils->toLowerCase("\t\vозеро Онтарио 223_!  \n")
+            "\t\vозеро онтарио 223_!  \n", StringUtils::toLowerCase("\t\vозеро Онтарио 223_!  \n")
         );
-        $this->assertEquals('', $this->stringUtils->toLowerCase(''));
+        $this->assertEquals('', StringUtils::toLowerCase(''));
     }
 
     public function testToLowerCaseFirst(): void
     {
         $this->assertEquals(
-            "\t\vlake Ontario 223_!  \n", $this->stringUtils->toLowerCaseFirst("\t\vlake Ontario 223_!  \n")
+            "\t\vlake Ontario 223_!  \n", StringUtils::toLowerCaseFirst("\t\vlake Ontario 223_!  \n")
         );
         $this->assertEquals(
-            "\t\vозеро Онтарио 223_!  \n", $this->stringUtils->toLowerCaseFirst("\t\vозеро Онтарио 223_!  \n")
+            "\t\vозеро Онтарио 223_!  \n", StringUtils::toLowerCaseFirst("\t\vозеро Онтарио 223_!  \n")
         );
-        $this->assertEquals('', $this->stringUtils->toLowerCaseFirst(''));
-        $this->assertEquals('john', $this->stringUtils->toLowerCaseFirst('John'));
-        $this->assertEquals('джон', $this->stringUtils->toLowerCaseFirst('Джон'));
+        $this->assertEquals('', StringUtils::toLowerCaseFirst(''));
+        $this->assertEquals('john', StringUtils::toLowerCaseFirst('John'));
+        $this->assertEquals('джон', StringUtils::toLowerCaseFirst('Джон'));
     }
 
     public function testToUpperCase(): void
     {
         $this->assertEquals(
-            "\t\vLAKE ONTARIO 223_!  \n", $this->stringUtils->toUpperCase("\t\vlake Ontario 223_!  \n")
+            "\t\vLAKE ONTARIO 223_!  \n", StringUtils::toUpperCase("\t\vlake Ontario 223_!  \n")
         );
         $this->assertEquals(
-            "\t\vОЗЕРО ОНТАРИО 223_!  \n", $this->stringUtils->toUpperCase("\t\vозеро Онтарио 223_!  \n")
+            "\t\vОЗЕРО ОНТАРИО 223_!  \n", StringUtils::toUpperCase("\t\vозеро Онтарио 223_!  \n")
         );
-        $this->assertEquals('', $this->stringUtils->toUpperCase(''));
+        $this->assertEquals('', StringUtils::toUpperCase(''));
     }
 
     public function testToUpperCaseFirst(): void
     {
         $this->assertEquals(
-            "\t\vlake Ontario 223_!  \n", $this->stringUtils->toUpperCaseFirst("\t\vlake Ontario 223_!  \n")
+            "\t\vlake Ontario 223_!  \n", StringUtils::toUpperCaseFirst("\t\vlake Ontario 223_!  \n")
         );
         $this->assertEquals(
-            "\t\vозеро Онтарио 223_!  \n", $this->stringUtils->toUpperCaseFirst("\t\vозеро Онтарио 223_!  \n")
+            "\t\vозеро Онтарио 223_!  \n", StringUtils::toUpperCaseFirst("\t\vозеро Онтарио 223_!  \n")
         );
-        $this->assertEquals('', $this->stringUtils->toUpperCaseFirst(''));
-        $this->assertEquals('John', $this->stringUtils->toUpperCaseFirst('john'));
-        $this->assertEquals('Джон', $this->stringUtils->toUpperCaseFirst('джон'));
+        $this->assertEquals('', StringUtils::toUpperCaseFirst(''));
+        $this->assertEquals('John', StringUtils::toUpperCaseFirst('john'));
+        $this->assertEquals('Джон', StringUtils::toUpperCaseFirst('джон'));
     }
 
     public function testToTitleCase(): void
     {
         $this->assertEquals(
-            "\t\vLake Ontario 223_!  \n", $this->stringUtils->toTitleCase("\t\vlake Ontario 223_!  \n")
+            "\t\vLake Ontario 223_!  \n", StringUtils::toTitleCase("\t\vlake Ontario 223_!  \n")
         );
         $this->assertEquals(
-            "\t\vОзеро Онтарио 223_!  \n", $this->stringUtils->toTitleCase("\t\vозеро Онтарио 223_!  \n")
+            "\t\vОзеро Онтарио 223_!  \n", StringUtils::toTitleCase("\t\vозеро Онтарио 223_!  \n")
         );
-        $this->assertEquals('', $this->stringUtils->toTitleCase(''));
+        $this->assertEquals('', StringUtils::toTitleCase(''));
     }
 
     public function testRand(): void
     {
-        $this->assertEquals(13, mb_strlen($this->stringUtils->rand(13, 'KakaЛала123_!')));
-        $this->assertEquals(5, mb_strlen($this->stringUtils->rand(5, ['f', 'f', 'ss', 'ь'])));
+        $this->assertEquals(13, mb_strlen(StringUtils::rand(13, 'KakaЛала123_!')));
+        $this->assertEquals(5, mb_strlen(StringUtils::rand(5, ['f', 'f', 'ss', 'ь'])));
     }
 
     public function testRandWithInvalidParameterAlphabet(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage('Parameter alphabet must been string or array');
-        $this->stringUtils->rand(1,  4);
-
+        StringUtils::rand(1, 4);
     }
 }

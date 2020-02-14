@@ -8,14 +8,6 @@ use Sokolovvs\Utils\StringUtils\StringUtils;
 
 class ArrayUtils
 {
-    /* @var StringUtils $stringUtils */
-    private $stringUtils;
-
-    public function __construct()
-    {
-        $this->stringUtils = new StringUtils();
-    }
-
     /**
      * Result = $array - $otherArray.
      *
@@ -25,7 +17,7 @@ class ArrayUtils
      * @return array
      * @example [2, 3, 'b']  = subtract(['a', 'b', 2, 3, 4, 5], [4, 5, 'a'])
      */
-    public function subtract(array $array, array $otherArray): array
+    public static function subtract(array $array, array $otherArray): array
     {
         return array_values(array_diff($array, array_intersect($array, $otherArray)));
     }
@@ -39,9 +31,9 @@ class ArrayUtils
      * @return array
      * @example [3, 4, 5, 'b']  = symmetricDiff(['a', 'b', 2, 3], [4, 5, 'a'])
      */
-    public function symmetricDiff(array $array, array $otherArray): array
+    public static function symmetricDiff(array $array, array $otherArray): array
     {
-        $mergeResult = array_merge($this->subtract($array, $otherArray), $this->subtract($otherArray, $array));
+        $mergeResult = array_merge(static::subtract($array, $otherArray), static::subtract($otherArray, $array));
 
         return array_values($mergeResult);
     }
@@ -53,7 +45,7 @@ class ArrayUtils
      *
      * @return array
      */
-    public function getValueIfIsArrayElseGetEmptyArray($value): array
+    public static function getValueIfIsArrayElseGetEmptyArray($value): array
     {
         return is_array($value) ? $value : [];
     }
@@ -66,7 +58,7 @@ class ArrayUtils
      *
      * @return bool
      */
-    public function equals(array $array, array $otherArray): bool
+    public static function equals(array $array, array $otherArray): bool
     {
         return $array === $otherArray;
     }
@@ -79,11 +71,10 @@ class ArrayUtils
      *
      * @return string[]
      */
-    public function rand(
+    public static function rand(
         int $length = 15,
         $alphabet = '_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     ): array {
-        return $this->stringUtils->toArray($this->stringUtils->rand($length, $alphabet));
+        return StringUtils::toArray(StringUtils::rand($length, $alphabet));
     }
-
 }

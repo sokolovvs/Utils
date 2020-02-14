@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsIsNotPositiveNumberTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsIsNotPositiveNumberTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->isNotPositiveNumber($number));
+        $this->assertEquals($expected, NumberUtils::isNotPositiveNumber($number));
     }
 
     public function dataProvide(): array
@@ -19,7 +22,7 @@ class NumberUtilsIsNotPositiveNumberTest extends NumberUtilsTest
         return [
             '1 is positive ' => [1, false],
             'PHP_INT_MIN is not positive ' => [PHP_INT_MIN, PHP_INT_MIN],
-            //            'PHP_INT_MIN -1 is not ' => [PHP_INT_MIN - 1, false], // TODO: need fix
+            'PHP_INT_MIN - 1 is not positive ' => [PHP_INT_MIN - 1, true],
             '\'-356\' is  string with  form int' => ['-356', true],
             '-56.232 is not ' => [-56.232, true],
             'NULL is not ' => [null, false],

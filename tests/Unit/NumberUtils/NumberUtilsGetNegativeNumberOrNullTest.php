@@ -4,22 +4,27 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsGetNegativeNumberOrNullTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsGetNegativeNumberOrNullTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->getNegativeNumberOrNull($number));
+        $this->assertEquals($expected, NumberUtils::getNegativeNumberOrNull($number));
     }
 
     public function dataProvide(): array
     {
+        $minIntMinusOne = sprintf('%.13f', PHP_INT_MIN - 1);
+
         return [
             '113 is not negative int' => [113, null],
-            'PHP_INT_MAX is negative int' => [PHP_INT_MIN, PHP_INT_MIN],
-//            'PHP_INT_MIN - 1 is not int' => [PHP_INT_MIN - 1, null], //TODO: need fix
+            'PHP_INT_MIN is negative int' => [PHP_INT_MIN, PHP_INT_MIN],
+            'PHP_INT_MIN - 1 is negative' => [$minIntMinusOne, $minIntMinusOne],
             '\'-356\' is negative int' => ['-356', -356],
             '-56.232 is not int' => [-56.232, -56.232],
             'NULL is not int' => [null, null],

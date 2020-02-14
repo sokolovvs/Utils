@@ -5,12 +5,13 @@ namespace Tests\Unit\DateTimeUtils\FormatUtils;
 
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\DateTimeFormatter;
 use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\InternationalFormat;
 use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\RussianFormat;
 use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\UsaFormat;
-use Tests\Unit\DateTimeUtils\DateTimeUtilsTest;
 
-class DateTimeFormatterTest extends DateTimeUtilsTest
+class DateTimeFormatterTest extends TestCase
 {
 
     /**
@@ -18,10 +19,7 @@ class DateTimeFormatterTest extends DateTimeUtilsTest
      */
     public function testDateToFormat($dateTime, $format, $expected): void
     {
-        $this->assertSame(
-            $expected, $this->dateTimeUtils->getDateTimeFormatter()
-            ->dateToFormat($dateTime, $format)
-        );
+        $this->assertSame($expected, DateTimeFormatter::dateToFormat($dateTime, $format));
     }
 
     public function dataProvideForDateToFormat(): array
@@ -57,10 +55,7 @@ class DateTimeFormatterTest extends DateTimeUtilsTest
      */
     public function testDateTimeToFormat($dateTime, $format, $expected): void
     {
-        $this->assertSame(
-            $expected, $this->dateTimeUtils->getDateTimeFormatter()
-            ->dateTimeToFormat($dateTime, $format)
-        );
+        $this->assertSame($expected, DateTimeFormatter::dateTimeToFormat($dateTime, $format));
     }
 
     public function dataProvideForDateTimeToFormat(): array

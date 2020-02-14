@@ -4,14 +4,17 @@
 namespace Tests\Unit\DateTimeUtils;
 
 
-class DateTimeUtilsGetTimezoneIfExistTest extends DateTimeUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\DateTimeUtils\DateTimeUtils;
+
+class DateTimeUtilsGetTimezoneIfExistTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($timezone, $expected): void
     {
-        $this->assertEquals($expected, $this->dateTimeUtils->getTimezoneIfExists($timezone));
+        $this->assertEquals($expected, DateTimeUtils::getTimezoneIfExists($timezone));
     }
 
     public function dataProvide(): array

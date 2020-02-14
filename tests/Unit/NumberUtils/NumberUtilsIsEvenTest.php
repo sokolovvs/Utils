@@ -4,7 +4,10 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsIsEvenTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsIsEvenTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
@@ -14,7 +17,7 @@ class NumberUtilsIsEvenTest extends NumberUtilsTest
      */
     public function test(int $number, bool $expected): void
     {
-        $this->assertSame($expected, $this->numberUtils->isEven($number));
+        $this->assertSame($expected, NumberUtils::isEven($number));
     }
 
     public function dataProvide(): array

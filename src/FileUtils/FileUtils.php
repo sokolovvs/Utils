@@ -12,14 +12,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUtils
 {
-    /* @var StringUtils $stringUtils */
-    protected $stringUtils;
-
-    public function __construct()
-    {
-        $this->stringUtils = new StringUtils();
-    }
-
     /**
      * Replace all '/' and '\' by DIRECTORY_SEPARATOR
      *
@@ -27,7 +19,7 @@ class FileUtils
      *
      * @return string
      */
-    public function replaceSlashesByDirectorySeparator(string $path): string
+    public static function replaceSlashesByDirectorySeparator(string $path): string
     {
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
@@ -40,13 +32,13 @@ class FileUtils
      * @param string $data
      * @param int    $flag
      */
-    public function writeFile(string $path, string $data, int $flag = 0): void
+    public static function writeFile(string $path, string $data, int $flag = 0): void
     {
         $path = trim($path);
-        $path = $this->replaceSlashesByDirectorySeparator($path);
+        $path = static::replaceSlashesByDirectorySeparator($path);
         $pathAsArray = explode(DIRECTORY_SEPARATOR, $path);
 
-        if (!$this->stringUtils->startsWith($path, '/')) {
+        if (!StringUtils::startsWith($path, '/')) {
             $pathAsArray[0] = "./$pathAsArray[0]";
         }
 
@@ -54,7 +46,7 @@ class FileUtils
         $pathAsArray = implode(DIRECTORY_SEPARATOR, $pathAsArray);
 
         if ($pathAsArray) {
-            $this->makeDirectory($pathAsArray);
+            static::makeDirectory($pathAsArray);
         }
 
         file_put_contents($path, $data, $flag);
@@ -65,7 +57,7 @@ class FileUtils
      *
      * @param string $path
      */
-    public function makeDirectory(string $path): void
+    public static function makeDirectory(string $path): void
     {
         $explodedPath = explode('/', $path);
         $currentPath = $explodedPath[0];
@@ -90,7 +82,7 @@ class FileUtils
      * @param string $path
      * @param string $pattern
      */
-    public function clearDirectory($path = '*', $pattern = '*'): void
+    public static function clearDirectory($path = '*', $pattern = '*'): void
     {
         $files = glob("$path/$pattern");
 
@@ -100,7 +92,7 @@ class FileUtils
             }
 
             if (is_dir($file)) {
-                $this->clearDirectory($file);
+                static::clearDirectory($file);
             }
         }
     }
@@ -114,7 +106,7 @@ class FileUtils
      *
      * @return bool true on success; false on failure
      */
-    public function removeDirRecursively($source, $removeOnlyChildren = false): bool
+    public static function removeDirRecursively($source, $removeOnlyChildren = false): bool
     {
         if (empty($source) || file_exists($source) === false) {
             return false;
@@ -132,7 +124,7 @@ class FileUtils
 
         foreach ($files as $fileInfo) {
             if ($fileInfo->isDir()) {
-                if ($this->removeDirRecursively($fileInfo->getRealPath()) === false) {
+                if (static::removeDirRecursively($fileInfo->getRealPath()) === false) {
                     return false;
                 }
             } elseif (unlink($fileInfo->getRealPath()) === false) {
@@ -147,7 +139,7 @@ class FileUtils
         return true;
     }
 
-    public function saveUploadedFileWithUniqueName(
+    public static function saveUploadedFileWithUniqueName(
         UploadedFile $uploadedFile,
         string $pathToDir,
         string $prefixName = ''
@@ -155,10 +147,10 @@ class FileUtils
         $unique = uniqid($prefixName);
         $fileExt = $uploadedFile->getClientOriginalExtension();
         $uniqueFileName = "$unique.$fileExt";
-        $uniqueFileName = $this->replaceSlashesByDirectorySeparator($uniqueFileName);
+        $uniqueFileName = static::replaceSlashesByDirectorySeparator($uniqueFileName);
 
         if (!is_dir($pathToDir)) {
-            $this->makeDirectory($pathToDir);
+            static::makeDirectory($pathToDir);
         }
 
         $file = $uploadedFile->move($pathToDir, $uniqueFileName);

@@ -4,28 +4,29 @@
 namespace Tests\Unit\ArrayUtils;
 
 
+use Sokolovvs\Utils\ArrayUtils\ArrayUtils;
 use Tests\Support\TestData\ClassWithToString;
 
 class ArraySymmetricDiffTest extends ArrayUtilsTest
 {
     public function testSymmetricDiffForEmptyArrayAndEmptyArrayEqualsEmptyArray(): void
     {
-        $this->assertEmpty($this->arrayUtils->symmetricDiff([], []));
+        $this->assertEmpty(ArrayUtils::symmetricDiff([], []));
     }
 
     public function testSymmetricDiffForRandArrayAndEmptyArrayEqualsRandArray(): void
     {
-        $this->assertEquals($this->randArray, $this->arrayUtils->symmetricDiff($this->randArray, []));
+        $this->assertEquals($this->randArray, ArrayUtils::symmetricDiff($this->randArray, []));
     }
 
     public function testSymmetricDiffForEmptyArrayAndRandArrayEqualsRandArray(): void
     {
-        $this->assertEquals($this->randArray, $this->arrayUtils->symmetricDiff([], $this->randArray));
+        $this->assertEquals($this->randArray, ArrayUtils::symmetricDiff([], $this->randArray));
     }
 
     public function testSymmetricDiffForRandArrayAndRandArrayEqualsEmptyArray(): void
     {
-        $this->assertEmpty($this->arrayUtils->symmetricDiff($this->randArray, $this->randArray));
+        $this->assertEmpty(ArrayUtils::symmetricDiff($this->randArray, $this->randArray));
     }
 
     public function testResultArrayMustContainsOnly3And10(): void
@@ -33,19 +34,19 @@ class ArraySymmetricDiffTest extends ArrayUtilsTest
         $nine = new ClassWithToString('9');
 
         $expected = [3, 10];
-        $actual = $this->arrayUtils->symmetricDiff([1, 3, 2], [2, 1, 10]);
+        $actual = ArrayUtils::symmetricDiff([1, 3, 2], [2, 1, 10]);
         sort($expected);
         sort($actual);
         $this->assertEquals($expected, $actual);
 
         $expected = [3, 10];
-        $actual = $this->arrayUtils->symmetricDiff([1, 3, 1, 2, 9], ['2', 1, 1, 1, 1, $nine, 10]);
+        $actual = ArrayUtils::symmetricDiff([1, 3, 1, 2, 9], ['2', 1, 1, 1, 1, $nine, 10]);
         sort($expected);
         sort($actual);
         $this->assertEquals($expected, $actual);
 
         $expected = [3, 10];
-        $actual = $this->arrayUtils->symmetricDiff(['2', 1, 1, 1, 1, $nine, 10], [1, 3, 1, 2, 9]);
+        $actual = ArrayUtils::symmetricDiff(['2', 1, 1, 1, 1, $nine, 10], [1, 3, 1, 2, 9]);
         sort($expected);
         sort($actual);
         $this->assertEquals($expected, $actual);
@@ -59,6 +60,6 @@ class ArraySymmetricDiffTest extends ArrayUtilsTest
         $array = [$aa, $a];
         $otherArray = [$a];
 
-        $this->assertEmpty($this->arrayUtils->symmetricDiff($array, $otherArray));
+        $this->assertEmpty(ArrayUtils::symmetricDiff($array, $otherArray));
     }
 }

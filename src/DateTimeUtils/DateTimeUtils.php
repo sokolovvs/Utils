@@ -12,24 +12,6 @@ use Sokolovvs\Utils\DateTimeUtils\FormatUtils\DateTimeFormatter;
 
 class DateTimeUtils
 {
-
-    /* @var DateTimeFormatter $dateTimeFormatter */
-    private $dateTimeFormatter;
-
-    public function __construct()
-    {
-        $this->dateTimeFormatter = new DateTimeFormatter();
-    }
-
-    /**
-     * @codeCoverageIgnore
-     * @return DateTimeFormatter
-     */
-    public function getDateTimeFormatter(): DateTimeFormatter
-    {
-        return $this->dateTimeFormatter;
-    }
-
     /**
      * If $dateTimeAsString is invalid for creating DateTimeImmutable object then return null, else return DateTime
      * object.
@@ -38,9 +20,9 @@ class DateTimeUtils
      *
      * @return DateTimeImmutable|null
      */
-    public function getDateTimeImmutableOrNullFromString($dateTimeAsString): ?DateTimeImmutable
+    public static function getDateTimeImmutableOrNullFromString($dateTimeAsString): ?DateTimeImmutable
     {
-        return $this->isValidDateTimeString($dateTimeAsString) ? new DateTimeImmutable($dateTimeAsString) : null;
+        return static::isValidDateTimeString($dateTimeAsString) ? new DateTimeImmutable($dateTimeAsString) : null;
     }
 
     /**
@@ -50,9 +32,9 @@ class DateTimeUtils
      *
      * @return DateTime|null
      */
-    public function getDateTimeMutableOrNullFromString($dateTimeAsString): ?DateTime
+    public static function getDateTimeMutableOrNullFromString($dateTimeAsString): ?DateTime
     {
-        return $this->isValidDateTimeString($dateTimeAsString) ? new DateTime($dateTimeAsString) : null;
+        return static::isValidDateTimeString($dateTimeAsString) ? new DateTime($dateTimeAsString) : null;
     }
 
     /**
@@ -62,7 +44,7 @@ class DateTimeUtils
      *
      * @return bool
      */
-    public function isValidDateTimeString($dateTimeAsString): bool
+    public static function isValidDateTimeString($dateTimeAsString): bool
     {
         if (is_string($dateTimeAsString)) {
             $dateTimeAsString = trim($dateTimeAsString);
@@ -87,7 +69,7 @@ class DateTimeUtils
      *
      * @return bool
      */
-    public function timezoneExists(string $timezone): bool
+    public static function timezoneExists(string $timezone): bool
     {
         try {
             $dateTimeZone = new DateTimeZone($timezone);
@@ -105,7 +87,7 @@ class DateTimeUtils
      *
      * @return DateTimeZone|null
      */
-    public function getTimezoneIfExists(string $timezone): ?DateTimeZone
+    public static function getTimezoneIfExists(string $timezone): ?DateTimeZone
     {
         try {
             $dateTimeZone = new DateTimeZone($timezone);

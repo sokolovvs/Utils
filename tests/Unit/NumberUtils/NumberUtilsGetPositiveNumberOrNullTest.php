@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsGetPositiveNumberOrNullTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsGetPositiveNumberOrNullTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->getPositiveNumberOrNull($number));
+        $this->assertEquals($expected, NumberUtils::getPositiveNumberOrNull($number));
     }
 
     public function dataProvide(): array
@@ -19,7 +22,10 @@ class NumberUtilsGetPositiveNumberOrNullTest extends NumberUtilsTest
         return [
             '132 is positive number' => [132, 132],
             'PHP_INT_MAX is positive number' => [PHP_INT_MAX, PHP_INT_MAX],
-//            'PHP_INT_MAX + 1 is positive' => [PHP_INT_MAX + 1, PHP_INT_MAX + 1], //TODO: fix for this param
+            'PHP_INT_MAX + 1 is positive' => [
+                sprintf('%.13f', PHP_INT_MAX + 1),
+                sprintf('%.13f', PHP_INT_MAX + 1),
+            ],
             '\'356.1121\' is positive number' => ['356.1121', 356.1121],
             '56.232 is positive number' => [56.232, 56.232],
             'NULL is not number' => [null, null],

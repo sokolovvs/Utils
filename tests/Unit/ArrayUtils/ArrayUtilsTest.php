@@ -17,7 +17,6 @@ abstract class ArrayUtilsTest extends TestCase
 
     public function setUp(): void
     {
-        $this->arrayUtils = new ArrayUtils();
-        $this->randArray = $this->arrayUtils->rand(random_int(0, 30));
+        $this->randArray = ArrayUtils::rand(random_int(0, 30));
     }
 }

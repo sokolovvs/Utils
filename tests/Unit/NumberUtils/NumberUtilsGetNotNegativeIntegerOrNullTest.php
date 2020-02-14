@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsGetNotNegativeIntegerOrNullTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsGetNotNegativeIntegerOrNullTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->getNotNegativeIntegerOrNull($number));
+        $this->assertEquals($expected, NumberUtils::getNotNegativeIntegerOrNull($number));
     }
 
     public function dataProvide(): array

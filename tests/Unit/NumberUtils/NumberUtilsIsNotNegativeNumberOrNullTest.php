@@ -4,14 +4,17 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsIsNotNegativeNumberOrNullTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsIsNotNegativeNumberOrNullTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, $this->numberUtils->isNotNegativeNumber($number));
+        $this->assertEquals($expected, NumberUtils::isNotNegativeNumber($number));
     }
 
     public function dataProvide(): array
@@ -19,7 +22,7 @@ class NumberUtilsIsNotNegativeNumberOrNullTest extends NumberUtilsTest
         return [
             '1 >= 0 -> true' => [1, true],
             'PHP_INT_MIN <= 0 -> null' => [PHP_INT_MIN, false],
-//            'PHP_INT_MAX + 1 => 0 -> HP_INT_MAX + 1' => [PHP_INT_MAX + 1, false], // TODO: fix
+            'PHP_INT_MAX + 1 => 0 -> PHP_INT_MAX + 1' => [PHP_INT_MAX + 1, true],
             '\'356\' >= 0 -> true' => ['356.327', true],
             '-56.232 is not int' => [-56.232, false],
             'NULL is not int -> null' => [null, false],

@@ -4,6 +4,8 @@
 namespace Tests\Unit\FileUtils;
 
 
+use Sokolovvs\Utils\FileUtils\FileUtils;
+
 class FileUtilsRemoveDirRecursivelyTest extends FileUtilsTest
 {
     /**
@@ -12,11 +14,11 @@ class FileUtilsRemoveDirRecursivelyTest extends FileUtilsTest
     public function test($path, $fileContent, $dirForRemoving): void
     {
         if (!is_dir($dirForRemoving)) {
-            $this->fileUtils->writeFile($path, $fileContent);
+            FileUtils::writeFile($path, $fileContent);
             $this->test($path, $fileContent, $dirForRemoving);
         }
 
-        $this->fileUtils->removeDirRecursively($dirForRemoving);
+        FileUtils::removeDirRecursively($dirForRemoving);
 
         $this->assertDirectoryNotExists($dirForRemoving);
     }

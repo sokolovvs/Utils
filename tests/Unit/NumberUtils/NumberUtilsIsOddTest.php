@@ -3,7 +3,10 @@
 namespace Tests\Unit\NumberUtils;
 
 
-class NumberUtilsIsOddTest extends NumberUtilsTest
+use PHPUnit\Framework\TestCase;
+use Sokolovvs\Utils\NumberUtils\NumberUtils;
+
+class NumberUtilsIsOddTest extends TestCase
 {
     /**
      * @dataProvider dataProvide
@@ -13,7 +16,7 @@ class NumberUtilsIsOddTest extends NumberUtilsTest
      */
     public function test(int $number, bool $expected): void
     {
-        $this->assertSame($expected, $this->numberUtils->isOdd($number));
+        $this->assertSame($expected, NumberUtils::isOdd($number));
     }
 
     public function dataProvide(): array

@@ -4,6 +4,8 @@
 namespace Tests\Unit\FileUtils;
 
 
+use Sokolovvs\Utils\FileUtils\FileUtils;
+
 class FileUtilsReplaceSlashesByDirectorySeparatorTest extends FileUtilsTest
 {
     /**
@@ -11,7 +13,7 @@ class FileUtilsReplaceSlashesByDirectorySeparatorTest extends FileUtilsTest
      */
     public function test($path, $expected): void
     {
-        $this->assertSame($expected, $this->fileUtils->replaceSlashesByDirectorySeparator($path));
+        $this->assertSame($expected, FileUtils::replaceSlashesByDirectorySeparator($path));
     }
 
     public function dataProvide(): array
