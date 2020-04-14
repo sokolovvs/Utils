@@ -149,6 +149,10 @@ class FileUtils
         $uniqueFileName = "$unique.$fileExt";
         $uniqueFileName = static::replaceSlashesByDirectorySeparator($uniqueFileName);
 
+        $subDirs = '/' . substr($unique, 0, 2) . '/' . substr($unique, 2, 2) . '/' . substr($unique, 4, 2);
+
+        $pathToDir .= $subDirs;
+
         if (!is_dir($pathToDir)) {
             static::makeDirectory($pathToDir);
         }
