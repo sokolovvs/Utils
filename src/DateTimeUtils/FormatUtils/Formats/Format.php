@@ -6,7 +6,15 @@ namespace Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats;
 
 abstract class Format
 {
-    abstract public function getDateFormat(): string;
+    private $format;
 
-    abstract public function getDateTimeFormat(): string;
+    public function __construct(string $format)
+    {
+        $this->format = $format;
+    }
+
+    public function getFormat(): string
+    {
+        return $this->format;
+    }
 }

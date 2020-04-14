@@ -7,82 +7,69 @@ namespace Tests\Unit\DateTimeUtils\FormatUtils;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Sokolovvs\Utils\DateTimeUtils\FormatUtils\DateTimeFormatter;
-use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\InternationalFormat;
-use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\RussianFormat;
-use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\UsaFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\InternationalDateFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\InternationalDateTimeFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\RussianDateFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\RussianDateTimeFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\UsaDateFormat;
+use Sokolovvs\Utils\DateTimeUtils\FormatUtils\Formats\UsaDateTimeFormat;
 
 class DateTimeFormatterTest extends TestCase
 {
 
     /**
-     * @dataProvider dataProvideForDateToFormat
+     * @dataProvider dataProvide
      */
     public function testDateToFormat($dateTime, $format, $expected): void
     {
-        $this->assertSame($expected, DateTimeFormatter::dateToFormat($dateTime, $format));
+        $this->assertSame($expected, DateTimeFormatter::format($dateTime, $format));
     }
 
-    public function dataProvideForDateToFormat(): array
+    public function dataProvide(): array
     {
         return [
-            'russian date format for datetime (2010/09/05 13:33:31) - 05.09.2010' => [
+            'russian date format for date (2010/09/05 13:33:31) - 05.09.2010' => [
                 new DateTime(
                     '2010/09/05 13:33:31'
                 ),
-                new RussianFormat(),
+                new RussianDateFormat(),
                 '05.09.2010',
             ],
-            'international date format for datetime (05.09.2010 13:33:31) - 05-09-2010' => [
+            'international date format for date (05.09.2010 13:33:31) - 05-09-2010' => [
                 new DateTime(
                     '05.09.2010 13:33:31'
                 ),
-                new InternationalFormat(),
+                new InternationalDateFormat(),
                 '05-09-2010',
             ],
-            'usa date format for datetime (05.09.2010 13:33:31) - 2010/09/05' => [
+            'usa date format for date (05.09.2010 13:33:31) - 2010/09/05' => [
                 new DateTime(
                     '05.09.2010 13:33:31'
                 ),
-                new UsaFormat(),
+                new UsaDateFormat(),
                 '09-05-2010',
             ],
-
-        ];
-    }
-
-    /**
-     * @dataProvider dataProvideForDateTimeToFormat
-     */
-    public function testDateTimeToFormat($dateTime, $format, $expected): void
-    {
-        $this->assertSame($expected, DateTimeFormatter::dateTimeToFormat($dateTime, $format));
-    }
-
-    public function dataProvideForDateTimeToFormat(): array
-    {
-        return [
             'russian date format for datetime (2010/09/05 13:33:31) - 05.09.2010 13:33:31' => [
                 new DateTime(
                     '2010/09/05 13:33:31'
                 ),
-                new RussianFormat(),
+                new RussianDateTimeFormat(),
                 '05.09.2010 13:33:31',
             ],
             'international date format for datetime (05.09.2010 13:33:31) - 05-09-2010' => [
                 new DateTime(
                     '05.09.2010 13:33:31'
                 ),
-                new InternationalFormat(),
+                new InternationalDateTimeFormat(),
                 '05-09-2010 13:33:31',
             ],
             'usa date format for datetime (05.09.2010 13:33:31) - 2010/09/05' => [
                 new DateTime(
                     '05.09.2010 13:33:31'
                 ),
-                new UsaFormat(),
+                new UsaDateTimeFormat(),
                 '09-05-2010 13:33:31',
             ],
-
         ];
     }
 }
