@@ -30,10 +30,6 @@ class BooleanAdapter
             $jsonObj = json_decode($value, true);
 
             if (json_last_error() === JSON_ERROR_NONE) {
-                if ($jsonObj === [0]) { // [0] = json_decode("{}", true)
-                    return true;
-                }
-
                 return is_bool($jsonObj) ? $jsonObj : (bool)$jsonObj;
             }
 
@@ -44,7 +40,7 @@ class BooleanAdapter
         return $filterResult === true;
     }
 
-    public static function toBooleanOrNull($value)
+    public static function toBooleanOrNull($value): ?bool
     {
         if ($value === null) {
             return null;

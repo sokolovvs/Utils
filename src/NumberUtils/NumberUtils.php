@@ -188,17 +188,21 @@ class NumberUtils
 
     /**
      * @param     $number
-     * @param int $decimals
+     * @param int $digitCount
      *
      * @return float|int|null
      */
-    public static function toFixed($number, $decimals = 3)
+    public static function toFixed($number, int $digitCount = 2)
     {
+        if ($digitCount <= 0) {
+            throw new \InvalidArgumentException('Parameter $digitCount must be positive integer');
+        }
+
         if (!is_numeric($number)) {
             return null;
         }
 
-        $expo = 10 ** $decimals;
+        $expo = 10 ** $digitCount;
 
         return (int)($number * $expo) / $expo;
     }
@@ -236,6 +240,4 @@ class NumberUtils
 
         return $number ? $number : null;
     }
-
-
 }
