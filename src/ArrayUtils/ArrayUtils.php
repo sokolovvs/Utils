@@ -51,16 +51,20 @@ class ArrayUtils
     }
 
     /**
-     * Checking arrays equals. TODO: add checking without sorting
+     * Checking arrays equals.
      *
      * @param array $array
      * @param array $otherArray
+     * @param bool  $checkSorting
      *
      * @return bool
      */
-    public static function equals(array $array, array $otherArray): bool
+    public static function equals(array $array, array $otherArray, bool $checkSorting = true): bool
     {
-        return $array === $otherArray;
+        return $checkSorting
+            ? $array === $otherArray
+            : count($array) === count($otherArray)
+            && array_diff($array, $otherArray) === array_diff($otherArray, $array);
     }
 
     /**

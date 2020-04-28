@@ -16,12 +16,14 @@ class ArrayEqualsTest extends ArrayUtilsTest
     public function testArrayMustEqualsArray(): void
     {
         $this->assertTrue(ArrayUtils::equals([1, 2, 3], [1, 2, 3]));
+        $this->assertTrue(ArrayUtils::equals([2, 1, 3], [1, 2, 3], false));
         $this->assertTrue(ArrayUtils::equals(['a' => 1, 'b' => 2, 'c' => 3], ['a' => 1, 'b' => 2, 'c' => 3]));
     }
 
     public function testArrayMustNotEqualsArrayWithDifferentOrder(): void
     {
         $this->assertFalse(ArrayUtils::equals([1, 2, 3], [1, 3, 2]));
+        $this->assertFalse(ArrayUtils::equals([2, 1, 3, 1], [1, 2, 3], false));
     }
 
     public function testArrayMustNotEqualsAnotherArrayIfAnotherArraySizeSmaller(): void
