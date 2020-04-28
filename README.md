@@ -6,6 +6,6 @@
 
 **Installation**
 
+```shell script
 composer require sokolovvs/utils
-
-**Documentation**
+```

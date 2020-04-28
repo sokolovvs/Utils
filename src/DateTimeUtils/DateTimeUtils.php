@@ -97,4 +97,14 @@ class DateTimeUtils
 
         return $dateTimeZone instanceof DateTimeZone ? $dateTimeZone : null;
     }
+
+    public static function castToTimeZone(\DateTime $dateTime, \DateTimeZone $zone): \DateTime
+    {
+        return $dateTime->setTimezone($zone);
+    }
+
+    public static function castToDefaultTimeZone(\DateTime $dateTime): \DateTime
+    {
+        return static::castToTimeZone($dateTime, new \DateTimeZone(date_default_timezone_get()));
+    }
 }
