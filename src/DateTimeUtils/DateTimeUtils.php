@@ -20,7 +20,7 @@ class DateTimeUtils
      *
      * @return DateTimeImmutable|null
      */
-    public static function getDateTimeImmutableOrNullFromString($dateTimeAsString): ?DateTimeImmutable
+    public static function getDateTimeImmutableFromString($dateTimeAsString): ?DateTimeImmutable
     {
         return static::isValidDateTimeString($dateTimeAsString) ? new DateTimeImmutable($dateTimeAsString) : null;
     }
@@ -32,7 +32,7 @@ class DateTimeUtils
      *
      * @return DateTime|null
      */
-    public static function getDateTimeMutableOrNullFromString($dateTimeAsString): ?DateTime
+    public static function getDateTimeMutableFromString($dateTimeAsString): ?DateTime
     {
         return static::isValidDateTimeString($dateTimeAsString) ? new DateTime($dateTimeAsString) : null;
     }

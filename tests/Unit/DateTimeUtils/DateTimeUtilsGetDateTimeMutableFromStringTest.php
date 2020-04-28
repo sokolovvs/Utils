@@ -15,23 +15,23 @@ class DateTimeUtilsGetDateTimeMutableFromStringTest extends TestCase
 
         $this->assertEquals(
             new \DateTime($dateTimeAsString),
-            DateTimeUtils::getDateTimeMutableOrNullFromString($dateTimeAsString)
+            DateTimeUtils::getDateTimeMutableFromString($dateTimeAsString)
         );
     }
 
     public function testReturnNullIfParameterIsInvalidDateTimeString(): void
     {
-        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(new \DateTime()));
-        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(''));
-        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString([]));
-        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(-12132333223323));
-        $this->assertNull(DateTimeUtils::getDateTimeMutableOrNullFromString(34.5623223233232));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableFromString(new \DateTime()));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableFromString(''));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableFromString([]));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableFromString(-12132333223323));
+        $this->assertNull(DateTimeUtils::getDateTimeMutableFromString(34.5623223233232));
     }
 
     public function testReturnDateTimeIfParameterIsTimestamp(): void
     {
         $this->assertEquals(
-            new \DateTime('@1578332712'), DateTimeUtils::getDateTimeMutableOrNullFromString('@1578332712')
+            new \DateTime('@1578332712'), DateTimeUtils::getDateTimeMutableFromString('@1578332712')
         );
     }
 

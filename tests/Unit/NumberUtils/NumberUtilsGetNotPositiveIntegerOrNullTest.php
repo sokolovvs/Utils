@@ -14,7 +14,7 @@ class NumberUtilsGetNotPositiveIntegerOrNullTest extends TestCase
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, NumberUtils::getNotPositiveIntegerOrNull($number));
+        $this->assertEquals($expected, NumberUtils::castToNotPositiveInt($number));
     }
 
     public function dataProvide(): array

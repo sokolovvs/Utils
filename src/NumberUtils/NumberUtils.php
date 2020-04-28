@@ -11,9 +11,9 @@ class NumberUtils
      *
      * @return int|null
      */
-    public static function getPositiveIntegerOrNull($number): ?int
+    public static function castToPositiveInt($number): ?int
     {
-        return static::isPositiveInteger($number) ? static::filterInteger($number) : null;
+        return static::isPositiveInt($number) ? static::filterInt($number) : null;
     }
 
     /**
@@ -21,7 +21,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isPositiveInteger($number): bool
+    public static function isPositiveInt($number): bool
     {
         return filter_var($number, FILTER_VALIDATE_INT) !== false && $number > 0;
     }
@@ -31,9 +31,9 @@ class NumberUtils
      *
      * @return int|null
      */
-    public static function getNotNegativeIntegerOrNull($number): ?int
+    public static function castToNotNegativeInt($number): ?int
     {
-        return static::isNotNegativeInteger($number) ? static::filterInteger($number) : null;
+        return static::isNotNegativeInt($number) ? static::filterInt($number) : null;
     }
 
     /**
@@ -41,7 +41,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNotNegativeInteger($number): bool
+    public static function isNotNegativeInt($number): bool
     {
         return filter_var($number, FILTER_VALIDATE_INT) !== false && $number >= 0;
     }
@@ -51,9 +51,9 @@ class NumberUtils
      *
      * @return int|null
      */
-    public static function getNegativeIntegerOrNull($number): ?int
+    public static function castToNegativeInt($number): ?int
     {
-        return static::isNegativeInteger($number) ? static::filterInteger($number) : null;
+        return static::isNegativeInt($number) ? static::filterInt($number) : null;
     }
 
     /**
@@ -61,7 +61,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNegativeInteger($number): bool
+    public static function isNegativeInt($number): bool
     {
         return filter_var($number, FILTER_VALIDATE_INT) !== false && $number < 0;
     }
@@ -71,9 +71,9 @@ class NumberUtils
      *
      * @return int|null
      */
-    public static function getNotPositiveIntegerOrNull($number): ?int
+    public static function castToNotPositiveInt($number): ?int
     {
-        return static::isNotPositiveInteger($number) ? static::filterInteger($number) : null;
+        return static::isNotPositiveInt($number) ? static::filterInt($number) : null;
     }
 
     /**
@@ -81,7 +81,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNotPositiveInteger($number): bool
+    public static function isNotPositiveInt($number): bool
     {
         return filter_var($number, FILTER_VALIDATE_INT) !== false && $number <= 0;
     }
@@ -91,9 +91,9 @@ class NumberUtils
      *
      * @return null|double|float|int
      */
-    public static function getPositiveNumberOrNull($number)
+    public static function castToPositiveNum($number)
     {
-        return static::isPositiveNumber($number) ? static::filterNumeric($number) : null;
+        return static::isPositiveNum($number) ? static::filterNumeric($number) : null;
     }
 
     /**
@@ -101,7 +101,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isPositiveNumber($number): bool
+    public static function isPositiveNum($number): bool
     {
         return is_numeric($number) && $number > 0;
     }
@@ -111,9 +111,9 @@ class NumberUtils
      *
      * @return null|double|float|int
      */
-    public static function getNotNegativeNumberOrNull($number)
+    public static function castToNotNegativeNum($number)
     {
-        return static::isNotNegativeNumber($number) ? static::filterNumeric($number) : null;
+        return static::isNotNegativeNum($number) ? static::filterNumeric($number) : null;
     }
 
     /**
@@ -121,7 +121,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNotNegativeNumber($number): bool
+    public static function isNotNegativeNum($number): bool
     {
         return is_numeric($number) && $number >= 0;
     }
@@ -131,9 +131,9 @@ class NumberUtils
      *
      * @return null|double|float|int
      */
-    public static function getNegativeNumberOrNull($number)
+    public static function castToNegativeNum($number)
     {
-        return static::isNegativeNumber($number) ? static::filterNumeric($number) : null;
+        return static::isNegativeNum($number) ? static::filterNumeric($number) : null;
     }
 
     /**
@@ -141,7 +141,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNegativeNumber($number): bool
+    public static function isNegativeNum($number): bool
     {
         return is_numeric($number) && $number < 0;
     }
@@ -151,9 +151,9 @@ class NumberUtils
      *
      * @return null|double|float|int
      */
-    public static function getNotPositiveNumberOrNull($number)
+    public static function castToNotPositiveNum($number)
     {
-        return static::isNotPositiveNumber($number) ? static::filterNumeric($number) : null;
+        return static::isNotPositiveNum($number) ? static::filterNumeric($number) : null;
     }
 
     /**
@@ -161,7 +161,7 @@ class NumberUtils
      *
      * @return bool
      */
-    public static function isNotPositiveNumber($number): bool
+    public static function isNotPositiveNum($number): bool
     {
         return is_numeric($number) && $number <= 0;
     }
@@ -234,7 +234,7 @@ class NumberUtils
      *
      * @return int|null
      */
-    public static function filterInteger($number): ?int
+    public static function filterInt($number): ?int
     {
         $number = filter_var($number, FILTER_VALIDATE_INT);
 

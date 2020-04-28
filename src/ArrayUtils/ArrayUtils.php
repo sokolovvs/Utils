@@ -45,7 +45,7 @@ class ArrayUtils
      *
      * @return array
      */
-    public static function getValueIfIsArrayElseGetEmptyArray($value): array
+    public static function castToArray($value): array
     {
         return is_array($value) ? $value : [];
     }

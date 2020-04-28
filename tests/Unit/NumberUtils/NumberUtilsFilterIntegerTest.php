@@ -14,7 +14,7 @@ class NumberUtilsFilterIntegerTest extends TestCase
      */
     public function test($number, $expected): void
     {
-        $this->assertEquals($expected, NumberUtils::filterInteger($number));
+        $this->assertEquals($expected, NumberUtils::filterInt($number));
     }
 
     public function dataProvide(): array

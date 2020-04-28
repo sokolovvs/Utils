@@ -14,7 +14,7 @@ class NumberUtilsIsNotNegativeIntegerTest extends TestCase
      */
     public function test($number, $expected): void
     {
-        $this->assertSame($expected, NumberUtils::isNotNegativeInteger($number));
+        $this->assertSame($expected, NumberUtils::isNotNegativeInt($number));
     }
 
     public function dataProvide(): array

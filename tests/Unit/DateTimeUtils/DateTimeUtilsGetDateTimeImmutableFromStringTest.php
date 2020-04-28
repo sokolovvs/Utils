@@ -15,23 +15,23 @@ class DateTimeUtilsGetDateTimeImmutableFromStringTest extends TestCase
 
         $this->assertEquals(
             new \DateTimeImmutable($dateTimeAsString),
-            DateTimeUtils::getDateTimeImmutableOrNullFromString($dateTimeAsString)
+            DateTimeUtils::getDateTimeImmutableFromString($dateTimeAsString)
         );
     }
 
     public function testReturnNullIfParameterIsInvalidDateTimeString(): void
     {
-        $this->assertNull(DateTimeUtils::getDateTimeImmutableOrNullFromString(new \DateTimeImmutable()));
-        $this->assertNull(DateTimeUtils::getDateTimeImmutableOrNullFromString(''));
-        $this->assertNull(DateTimeUtils::getDateTimeImmutableOrNullFromString([]));
-        $this->assertNull(DateTimeUtils::getDateTimeImmutableOrNullFromString(-12132333223323));
-        $this->assertNull(DateTimeUtils::getDateTimeImmutableOrNullFromString(34.5623223233232));
+        $this->assertNull(DateTimeUtils::getDateTimeImmutableFromString(new \DateTimeImmutable()));
+        $this->assertNull(DateTimeUtils::getDateTimeImmutableFromString(''));
+        $this->assertNull(DateTimeUtils::getDateTimeImmutableFromString([]));
+        $this->assertNull(DateTimeUtils::getDateTimeImmutableFromString(-12132333223323));
+        $this->assertNull(DateTimeUtils::getDateTimeImmutableFromString(34.5623223233232));
     }
 
     public function testReturnDateTimeIfParameterIsTimestamp(): void
     {
         $this->assertEquals(
-            new \DateTimeImmutable('@1578332712'), DateTimeUtils::getDateTimeImmutableOrNullFromString('@1578332712')
+            new \DateTimeImmutable('@1578332712'), DateTimeUtils::getDateTimeImmutableFromString('@1578332712')
         );
     }
 
