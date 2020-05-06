@@ -4,10 +4,13 @@
 namespace Sokolovvs\Utils\FileUtils;
 
 
+use App\Entity\File;
+use Doctrine\ORM\EntityManagerInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 use Sokolovvs\Utils\StringUtils\StringUtils;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUtils
@@ -160,5 +163,25 @@ class FileUtils
         $file = $uploadedFile->move($pathToDir, $uniqueFileName);
 
         return "$pathToDir/$uniqueFileName";
+    }
+
+    /**
+     * @param string $resource
+     *
+     * @return UploadedFile
+     */
+    public static function uploadFromResource(
+        string $resource
+    ): UploadedFile {
+        $file = @file_get_contents($resource);
+
+        if ($file === false) {
+            throw new UploadException('Could not find / upload file');
+        }
+
+        $fileName = sprintf('%s/%s', sys_get_temp_dir(), md5(uniqid('', true)));
+        file_put_contents($fileName, $file);
+
+        return new UploadedFile($fileName, md5(uniqid('', true)), mime_content_type($fileName), null, true);
     }
 }
