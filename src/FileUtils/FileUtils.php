@@ -141,47 +141,4 @@ class FileUtils
 
         return true;
     }
-
-    public static function saveUploadedFileWithUniqueName(
-        UploadedFile $uploadedFile,
-        string $pathToDir,
-        string $prefixName = ''
-    ): string {
-        $unique = uniqid($prefixName);
-        $fileExt = $uploadedFile->getClientOriginalExtension();
-        $uniqueFileName = "$unique.$fileExt";
-        $uniqueFileName = static::replaceSlashesByDirectorySeparator($uniqueFileName);
-
-        $subDirs = '/' . substr($unique, 0, 2) . '/' . substr($unique, 2, 2) . '/' . substr($unique, 4, 2);
-
-        $pathToDir .= $subDirs;
-
-        if (!is_dir($pathToDir)) {
-            static::makeDirectory($pathToDir);
-        }
-
-        $file = $uploadedFile->move($pathToDir, $uniqueFileName);
-
-        return "$pathToDir/$uniqueFileName";
-    }
-
-    /**
-     * @param string $resource
-     *
-     * @return UploadedFile
-     */
-    public static function uploadFromResource(
-        string $resource
-    ): UploadedFile {
-        $file = @file_get_contents($resource);
-
-        if ($file === false) {
-            throw new UploadException('Could not find / upload file');
-        }
-
-        $fileName = sprintf('%s/%s', sys_get_temp_dir(), md5(uniqid('', true)));
-        file_put_contents($fileName, $file);
-
-        return new UploadedFile($fileName, md5(uniqid('', true)), mime_content_type($fileName), null, true);
-    }
 }
