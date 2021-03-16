@@ -81,4 +81,32 @@ class ArrayUtils
     ): array {
         return StringUtils::toArray(StringUtils::rand($length, $alphabet));
     }
+
+    public static function isSubsetOf(iterable $subset, iterable $set, ?callable $comparator = null): bool
+    {
+        $setContainsAllItemsFromSet = true;
+        $defaultComparator = static function ($item, $otherItem) {
+            return $item === $otherItem;
+        };
+        $comparator = $comparator ?: $defaultComparator;
+
+        foreach ($subset as $subsetItem) {
+            $setContainsSubsetItem = false;
+
+            foreach ($set as $setItem) {
+                if ($comparator($setItem, $subsetItem)) {
+                    $setContainsSubsetItem = true;
+                    break;
+                }
+            }
+
+            $setContainsAllItemsFromSet = $setContainsSubsetItem;
+
+            if (!$setContainsAllItemsFromSet) {
+                break;
+            }
+        }
+
+        return $setContainsAllItemsFromSet;
+    }
 }
